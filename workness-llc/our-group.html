@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Group | Workness LLC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --clr-bg: #171717;
+      --clr-surface: #181d24;
+      --clr-accent: #0ea5e9;
+      --clr-accent-alt: #6366f1;
+      --clr-text: #fff;
+      --clr-text-dim: #94a3b8;
+      --nav-height: 70px;
+      /* >>> ADD YOUR IMAGE PATH HERE <<< */
+      --page-bg: url('ChatGPT Image Jul 22, 2025, 10_53_26 PM.png');
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, system-ui, Arial, sans-serif;
+      background: var(--clr-bg);
+      color: var(--clr-text);
+      -webkit-font-smoothing: antialiased;
+      position: relative;
+    }
+    /* >>> BACKGROUND LAYER <<< */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      background: var(--page-bg) center/cover no-repeat;
+      opacity:.25;
+      z-index:-1;
+      pointer-events:none;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    ul { margin: 0; padding: 0; list-style: none; }
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin-inline: auto;
+      padding: 0 1.25rem;
+    }
+
+    /* Header/Nav */
+    header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(25,25,25,0.98);
+      box-shadow: 0 2px 16px 0 #000a;
+      border-bottom: 2px solid #4d61ff;
+    }
+    nav {
+      height: var(--nav-height);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: .65rem;
+      font-weight: 600;
+      font-size: 1.05rem;
+      letter-spacing: .5px;
+    }
+    .logo img {
+      height: 56px;
+      filter: drop-shadow(0 2px 8px #0008);
+    }
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+    .main-nav > li > a {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      gap: .35rem;
+      padding: .65rem 0;
+      font-weight: 700;
+      font-size: 1.05rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--clr-text);
+    }
+    .main-nav > li > a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: .35rem;
+      height: 3px; width: 0;
+      background: #4d61ff;
+      border-radius: 2px;
+      transition: width .35s;
+    }
+    .main-nav > li > a:hover::after,
+    .main-nav > li > a:focus-visible::after {
+      width: 100%;
+    }
+    .main-nav > li > a:hover,
+    .main-nav > li > a:focus-visible {
+      color: #4d61ff;
+    }
+
+    /* Dropdown */
+    .dropdown { position: relative; }
+    .dropdown > a { cursor: pointer; }
+    .dropdown-menu {
+      display: none !important;
+      position: absolute;
+      left: 0; top: 100%;
+      min-width: 250px;
+      margin-top: 0;
+      padding: .75rem 0;
+      background: var(--clr-surface);
+      border: 1px solid #222a33;
+      border-radius: .75rem;
+      box-shadow: 0 8px 28px -6px rgba(0,0,0,.55);
+      animation: fadeSlide .25s ease;
+    }
+    .dropdown-menu::before {
+      content: "";
+      position: absolute;
+      left: 18px; top: -8px;
+      width: 14px; height: 14px;
+      background: var(--clr-surface);
+      transform: rotate(45deg);
+      border-left: 1px solid #222a33;
+      border-top:  1px solid #222a33;
+    }
+    .dropdown:hover > .dropdown-menu,
+    .dropdown:focus-within > .dropdown-menu,
+    .dropdown-menu:hover,
+    .dropdown-menu:focus {
+      display: block !important;
+    }
+    .dropdown-menu li a {
+      display: block;
+      padding: .6rem 1rem .55rem;
+      font-size: .9rem;
+      color: var(--clr-text-dim);
+      transition: background .25s, color .25s;
+    }
+    .dropdown-menu li a:hover {
+      background: #1f2731;
+      color: var(--clr-text);
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+    .nav-toggle { display: none; }
+    @media (max-width: 900px) {
+      .main-nav {
+        position: fixed;
+        inset: 0 0 auto 0;
+        top: var(--nav-height);
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem 1.25rem;
+        background: var(--clr-surface);
+        gap: .35rem;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height .45s ease;
+      }
+      body.nav-open .main-nav { max-height: 80vh; }
+      .nav-toggle {
+        display: inline-flex;
+        background: #1c242c;
+        border: 1px solid #27313b;
+        border-radius: .65rem;
+        padding: .65rem .85rem;
+        gap: .55rem;
+        align-items: center;
+        color: var(--clr-text);
+        font-weight: 500;
+        cursor: pointer;
+      }
+      .dropdown-menu {
+        position: relative; left: auto; top: auto;
+        margin: .25rem 0 .65rem;
+        border-radius: .6rem; box-shadow: none;
+        min-width: 100%;
+      }
+      .dropdown-menu::before { display: none; }
+      .dropdown:hover > .dropdown-menu { display: none !important; }
+      .dropdown.open > .dropdown-menu { display: block !important; }
+      .dropdown > a .chev { transition: transform .3s; }
+      .dropdown.open > a .chev { transform: rotate(180deg); }
+    }
+
+    /* Group Grid */
+    h1 {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin: calc(var(--nav-height) + 2rem) 0 1.5rem;
+      letter-spacing: 1px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 2.5rem;
+      margin: 3rem 0 4rem;
+    }
+    .person-card {
+      background: #23293a;
+      border-radius: 1.2rem;
+      box-shadow: 0 8px 32px -12px #000a;
+      overflow: hidden;
+      text-align: center;
+      padding: 2.2rem 1.2rem 1.5rem;
+      transition: transform .35s cubic-bezier(.4,1.4,.6,1), box-shadow .35s;
+      cursor: pointer;
+      position: relative;
+      min-height: 380px;
+    }
+    .person-card:hover {
+      transform: scale(1.07);
+      box-shadow: 0 16px 48px -12px #4d61ff99;
+      z-index: 2;
+    }
+    .person-photo {
+      width: 110px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: 0 auto 1.2rem;
+      border: 3px solid #4d61ff44;
+      box-shadow: 0 2px 12px #0006;
+      background: var(--clr-surface);
+    }
+    .person-name {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: .3rem;
+    }
+    .person-role {
+      color: var(--clr-accent);
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin-bottom: 1.1rem;
+    }
+
+    /* >>> SCROLLABLE INFO <<< */
+    .person-info {
+      opacity: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: opacity .35s, max-height .35s;
+      color: #cbd5e1;
+      font-size: 1rem;
+      margin-top: .5rem;
+      padding-right: .5rem;              /* space for scrollbar */
+    }
+    .person-card:hover .person-info {
+      opacity: 1;
+      max-height: 220px;                 /* enough height to allow scroll */
+      overflow-y: auto;                  /* enable vertical scroll */
+    }
+    /* Optional thin scrollbar */
+    .person-info::-webkit-scrollbar{
+      width:6px;
+    }
+    .person-info::-webkit-scrollbar-track{
+      background:#1a1f27;
+      border-radius:3px;
+    }
+    .person-info::-webkit-scrollbar-thumb{
+      background:#4d61ff99;
+      border-radius:3px;
+    }
+
+    @media (max-width: 700px) {
+      .group-grid { gap: 1.2rem; }
+      .person-card { padding: 1.2rem .5rem 1rem; }
+    }
+
+    /* Footer */
+    footer {
+      margin-top: 0;
+      padding: 3rem 0 4rem;
+      border-top: 1px solid #1f242c;
+      background: #12161c;
+      font-size: .85rem;
+      color: var(--clr-text-dim);
+    }
+    footer .cols {
+      display: grid;
+      gap: 2.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    }
+    footer h4 {
+      margin: 0 0 1rem;
+      font-size: .9rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      letter-spacing: .5px;
+    }
+    footer a {
+      display: block;
+      padding: .25rem 0;
+      color: var(--clr-text-dim);
+    }
+    footer a:hover { color: var(--clr-text); }
+    .copyright {
+      margin-top: 2.5rem;
+      text-align: center;
+      font-size: .7rem;
+      letter-spacing: .75px;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+<a href="index.html#home" class="logo">
+  <img src="logo.png" alt="Logo">
+  <span>Workness LLC</span>
+</a>
+        <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="primaryNav">Menu</button>
+        <ul class="main-nav" id="primaryNav">
+          <li><a href="index.html#home">Home</a></li>
+          <li class="dropdown">
+            <a href="#services" tabindex="0">Services <span class="chev">▾</span></a>
+            <ul class="dropdown-menu">
+              <li><a href="service-1.html">Business Incorporation</a></li>
+              <li><a href="service-2.html">Feasibility Studies</a></li>
+              <li><a href="service-3.html">Market Research</a></li>
+              <li><a href="service-4.html">Business Model & Strategy</a></li>
+              <li><a href="service-5.html">Business Matchmaking & Networking</a></li>
+              <li><a href="service-6.html">Corporate Restructuring & Optimization</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="our-group.html">Our Group</a></li>
+          <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <h1>Our Group</h1>
+    <div class="container">
+      <div class="group-grid">
+        <div class="person-card">
+          <img src="Picture5.png" alt="Dr. Heba Elsayed" class="person-photo"/>
+          <div class="person-name">Dr. Heba Elsayed</div>
+          <div class="person-info">
+            She holds a DBA in Finance and Investment and an MBA from the French University in Egypt, along with a Diploma in Decision Support Systems from IBM and a Bachelor’s in Foreign Trade from Helwan University. She began her career at the Trade Information Center and rose to senior leadership roles within the Internal Trade Development Authority, ultimately serving as Chairperson. With over 25 years of experience, she has led national trade and investment strategies. She also brings broad consultancy expertise across multiple sectors, with a focus on market development and strategic planning.
+          </div>
+        </div>
+        <div class="person-card">
+          <img src="Picture6.png" alt="Mr. Ehab Magdy Nosir" class="person-photo"/>
+          <div class="person-name">Mr. Ehab Magdy Nosir</div>
+          <div class="person-info">
+            A highly motivated and versatile professional with a strong background in accounting, real estate appraisal, and sales. Demonstrated expertise in SAP-based financial operations, vendor management, and accounts payable reporting . served as a Real Estate Appraiser, conducting property evaluations and feasibility studies. 
+          </div>
+        </div>
+        <div class="person-card">
+          <img src="https://randomuser.me/api/portraits/men/65.jpg" alt="Mr. .Haytham Hatata" class="person-photo"/>
+          <div class="person-name">Mr. .Haytham Hatata</div>
+          <div class="person-info">
+            He possesses a wealth of experience in business management, with a strong track record spanning over 25 years. Throughout his career, he has specialized in strategic market expansion across African countries, playing a pivotal role in establishing and growing export channels for Egyptian products. his deep understanding of international trade dynamics, coupled with his ability to build sustainable commercial partnerships, has significantly contributed to enhancing Egypt’s export footprint across the continent..
+          </div>
+        </div>
+        <div class="person-card">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Eng. Mariam Haytham" class="person-photo"/>
+          <div class="person-name">Eng. Mariam Haytham</div>
+          <div class="person-info">
+            She is a dynamic and forward-thinking young professional, recognized for her innovative approach to project development and execution. 
+            Her creativity, strategic mindset, and strong problem-solving abilities make her a key contributor to driving impactful ideas and leading successful initiatives within the team.
+          </div>
+        </div>
+        <div class="person-card">
+          <img src="https://randomuser.me/api/portraits/men/77.jpg" alt="Eng. Omar Haytham" class="person-photo"/>
+          <div class="person-name">Eng. Omar Haytham</div>
+          <div class="person-info">
+            He is one of the dynamic young professionals on the team, distinguished by his innovative approach to project development and implementation. 
+            His forward-thinking mindset and creative problem-solving skills make him a valuable asset in driving new ideas and strategic initiatives.
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+<footer>
+  <div class="container">
+    <div class="cols">
+      <div>
+        <h4>Company</h4>
+        <a href="about.html">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+      </div>
+      <div>
+        <h4>Follow</h4>
+        <a href="#">LinkedIn</a>
+        <a href="#">GitHub</a>
+        <a href="#">Twitter</a>
+      </div>
+    </div>
+    <p class="copyright">© <span id="year"></span> Workness LLC • All rights reserved.</p>
+  </div>
+</footer>
+
+  <script>
+    // set current year
+    document.getElementById('year').textContent = new Date().getFullYear();
+    // mobile nav toggle
+    const navToggle = document.getElementById('navToggle');
+    navToggle.addEventListener('click', () => {
+      const open = document.body.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', open);
+    });
+    // mobile dropdown toggle
+    document.querySelectorAll('.dropdown > a').forEach(a => {
+      a.addEventListener('click', e => {
+        if (window.matchMedia('(max-width: 900px)').matches) {
+          e.preventDefault();
+          a.parentElement.classList.toggle('open');
+        }
+      });
+    });
+    // dropdown hover delay
+    document.querySelectorAll('.dropdown').forEach(dropdown => {
+      let hideTimeout;
+      const menu = dropdown.querySelector('.dropdown-menu');
+      if (!menu) return;
+      dropdown.addEventListener('mouseenter', () => {
+        clearTimeout(hideTimeout);
+        menu.style.display = 'block';
+      });
+      dropdown.addEventListener('mouseleave', () => {
+        hideTimeout = setTimeout(() => menu.style.display = '', 350);
+      });
+      menu.addEventListener('mouseenter', () => clearTimeout(hideTimeout));
+      menu.addEventListener('mouseleave', () => {
+        hideTimeout = setTimeout(() => menu.style.display = '', 350);
+      });
+    });
+  </script>
+</body>
+</html>
